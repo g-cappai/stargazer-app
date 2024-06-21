@@ -27,4 +27,12 @@ describe("Button component", () => {
     const button = screen.getByText(text);
     expect(button).toBeDefined();
   });
+
+  it("should not call the onPress when disabled", () => {
+    const handlePress = jest.fn();
+    render(<Button disabled onPress={handlePress} />);
+    const button = screen.getByRole("button");
+    fireEvent.press(button);
+    expect(handlePress).toHaveBeenCalledTimes(0);
+  });
 });
