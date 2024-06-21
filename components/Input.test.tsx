@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react-native";
+import { render, screen, userEvent } from "@testing-library/react-native";
 import { Input } from "./Input";
 
 describe("Input component", () => {
@@ -16,5 +16,12 @@ describe("Input component", () => {
     rerender(<Input label="inputLabel" errorMessage="error" />);
     const errorText = screen.queryByRole("alert");
     expect(errorText).toHaveTextContent("error");
+  });
+
+  it("should display text passed as value", async () => {
+    const text = "userInput";
+    render(<Input label="inputLabel" value={text} />);
+    const input = screen.getByDisplayValue(text);
+    expect(input).toBeOnTheScreen();
   });
 });
