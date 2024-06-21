@@ -24,4 +24,13 @@ describe("Input component", () => {
     const input = screen.getByDisplayValue(text);
     expect(input).toBeOnTheScreen();
   });
+
+  it("should update the value when the user types", () => {
+    const changeHandler = jest.fn();
+    const text = "userInput";
+    render(<Input label="inputLabel" onChange={changeHandler} />);
+    const input = screen.getByLabelText("inputLabel");
+    fireEvent.changeText(input, text);
+    expect(changeHandler).toHaveBeenCalledWith(text);
+  });
 });
