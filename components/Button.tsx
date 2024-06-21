@@ -1,5 +1,9 @@
 import { Pressable } from "react-native";
 
-export function Button() {
-  return <Pressable role="button" />;
+type ButtonProps = {
+  onPress?: () => void;
+};
+
+export function Button({ onPress }: ButtonProps) {
+  return <Pressable role="button" onPress={onPress} />;
 }
