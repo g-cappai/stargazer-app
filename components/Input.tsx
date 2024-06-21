@@ -1,12 +1,12 @@
 import { Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-type InputProps = {
+interface InputProps {
   label: string;
   errorMessage?: string;
   value?: string;
   onChange?: (value: string) => void;
-};
+}
 
 export function Input({ value, onChange, label, errorMessage }: InputProps) {
   return (
