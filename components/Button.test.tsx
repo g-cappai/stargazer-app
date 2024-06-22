@@ -6,7 +6,7 @@ describe("Button component", () => {
   it("should render a button element", () => {
     render(<Button />);
     const button = screen.getByRole("button");
-    expect(button).toBeDefined();
+    expect(button).toBeOnTheScreen();
   });
 
   it("should call the onPress function when the button is pressed", () => {
@@ -21,7 +21,7 @@ describe("Button component", () => {
     const text = "buttonText";
     render(<Button title={text} />);
     const button = screen.getByText(text);
-    expect(button).toBeDefined();
+    expect(button).toBeOnTheScreen();
   });
 
   it("should not call the onPress when disabled", () => {

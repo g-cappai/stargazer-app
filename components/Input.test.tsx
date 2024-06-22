@@ -5,7 +5,7 @@ describe("Input component", () => {
   it("should render an input element", () => {
     render(<Input label="inputLabel" />);
     const input = screen.getByLabelText("inputLabel");
-    expect(input).toBeDefined();
+    expect(input).toBeOnTheScreen();
   });
 
   it("should render an helper text if there's an error", () => {
