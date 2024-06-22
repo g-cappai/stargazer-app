@@ -1,14 +1,13 @@
-import { ReactNode } from "react";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 
 interface ButtonProps {
   onPress?: () => void;
-  children?: ReactNode;
+  title?: string;
   label?: string;
   disabled?: boolean;
 }
 
-export function Button({ onPress, label, disabled, children }: ButtonProps) {
+export function Button({ onPress, label, disabled, title }: ButtonProps) {
   return (
     <Pressable
       role="button"
@@ -16,7 +15,7 @@ export function Button({ onPress, label, disabled, children }: ButtonProps) {
       aria-label={label}
       disabled={disabled}
     >
-      {children}
+      <Text>{title}</Text>
     </Pressable>
   );
 }

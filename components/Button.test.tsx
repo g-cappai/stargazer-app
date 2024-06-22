@@ -19,11 +19,7 @@ describe("Button component", () => {
 
   it("should display the text passed as children", () => {
     const text = "buttonText";
-    render(
-      <Button>
-        <Text>{text}</Text>
-      </Button>
-    );
+    render(<Button title={text} />);
     const button = screen.getByText(text);
     expect(button).toBeDefined();
   });
