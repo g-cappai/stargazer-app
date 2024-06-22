@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { ListItem } from "./ListItem";
 
@@ -18,13 +18,15 @@ export function StargazerList({
       accessibilityRole="list"
       aria-label="Stargazers list"
       data={stargazers}
+      onEndReached={loadMore}
       renderItem={({ item: { avatarUrl, name } }) => (
         <ListItem avatarUrl={avatarUrl} userName={name} />
       )}
-      onEndReached={loadMore}
       ListEmptyComponent={<View accessibilityLabel="No stargazers found" />}
       ListFooterComponent={
-        isLoadingMore ? <View accessibilityLabel="Loading more" /> : null
+        isLoadingMore ? (
+          <ActivityIndicator accessibilityLabel="Loading more" />
+        ) : null
       }
     />
   );
