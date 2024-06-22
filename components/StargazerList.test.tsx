@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react-native";
 import { StargazerList } from "./StargazerList";
 
-describe("StargazersList", () => {
+describe("StargazersList component", () => {
   it("should render list and elements", () => {
     render(
       <StargazerList
