@@ -17,4 +17,12 @@ describe("StargazersList", () => {
     const listItems = screen.getAllByTestId("stargazersListItem");
     expect(listItems).toHaveLength(2);
   });
+
+  it("should render empty state if no stargazers", () => {
+    render(<StargazerList stargazers={[]} />);
+    const listItems = screen.queryAllByTestId("stargazersListItem");
+    const emptyList = screen.getByLabelText("No stargazers found");
+    expect(listItems).toHaveLength(0);
+    expect(emptyList).toBeOnTheScreen();
+  });
 });
