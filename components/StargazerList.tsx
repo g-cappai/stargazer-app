@@ -12,6 +12,7 @@ export function StargazerList({ stargazers }: StargazerListProps) {
       aria-label="Stargazers list"
       data={stargazers}
       renderItem={({ item }) => <View testID="stargazersListItem" />}
+      ListEmptyComponent={<View accessibilityLabel="No stargazers found" />}
     />
   );
 }
