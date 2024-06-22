@@ -7,7 +7,7 @@ interface ListItemProps {
 
 export function ListItem({ avatarUrl, userName }: ListItemProps) {
   return (
-    <View>
+    <View testID="stargazersListItem">
       <Image
         accessibilityRole="image"
         accessibilityLabel="User avatar"
