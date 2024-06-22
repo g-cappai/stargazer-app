@@ -52,4 +52,16 @@ describe("SearchForm component", () => {
       expect(handleSubmit).not.toHaveBeenCalled();
     });
   });
+
+  it("should show helper text if invalid submission", async () => {
+    const handleSubmit = jest.fn();
+    render(<SearchForm onSubmit={handleSubmit} />);
+    const searchButton = screen.getByLabelText("Search");
+    expect(screen.queryByRole("alert")).not.toBeOnTheScreen();
+
+    fireEvent.press(searchButton);
+    await waitFor(() =>
+      expect(screen.queryAllByRole("alert")[0]).toBeOnTheScreen()
+    );
+  });
 });
