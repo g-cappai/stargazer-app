@@ -3,7 +3,7 @@ import { SearchForm } from "./SearchForm";
 
 describe("SearchForm component", () => {
   it("should render a search form", () => {
-    render(<SearchForm />);
+    render(<SearchForm onSubmit={() => {}} />);
     const repositoryOwnerInput = screen.getByLabelText("Repository owner");
     const repositoryNameInput = screen.getByLabelText("Repository name");
     const searchButton = screen.getByLabelText("Search");
