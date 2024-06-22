@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import { Button } from "./Button";
-import { Text } from "react-native";
 
 describe("Button component", () => {
   it("should render a button element", () => {
