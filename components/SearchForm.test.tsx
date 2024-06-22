@@ -1,4 +1,9 @@
-import { render, screen } from "@testing-library/react-native";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react-native";
 import { SearchForm } from "./SearchForm";
 
 describe("SearchForm component", () => {
@@ -11,5 +16,29 @@ describe("SearchForm component", () => {
     expect(repositoryOwnerInput).toBeDefined();
     expect(repositoryNameInput).toBeDefined();
     expect(searchButton).toBeDefined();
+  });
+
+  it("should submit form if valid when search button is pressed", async () => {
+    const handleSubmit = jest.fn();
+    render(<SearchForm onSubmit={handleSubmit} />);
+    const repositoryOwnerInput = screen.getByLabelText("Repository owner");
+    const repositoryNameInput = screen.getByLabelText("Repository name");
+    const searchButton = screen.getByLabelText("Search");
+
+    const owner = "facebook";
+    const name = "react";
+
+    fireEvent.changeText(repositoryOwnerInput, owner);
+    fireEvent.changeText(repositoryNameInput, name);
+    fireEvent.press(searchButton);
+
+    await waitFor(() =>
+      expect(handleSubmit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          repositoryOwner: owner,
+          repositoryName: name,
+        })
+      )
+    );
   });
 });
