@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import { Input } from "./Input";
-import { Button } from "./Button";
+import { Input } from "../shared";
+import { Button } from "../shared";
 import { Controller, useForm } from "react-hook-form";
 
 interface SearchFormProps {
