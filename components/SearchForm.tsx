@@ -32,6 +32,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           />
         )}
         name="repositoryOwner"
+        rules={{ required: "Repository owner is required" }}
       />
       <Controller
         control={control}
@@ -43,6 +44,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           />
         )}
         name="repositoryName"
+        rules={{ required: "Repository name is required" }}
       />
       <Button
         label="Search"
