@@ -64,4 +64,33 @@ describe("SearchForm component", () => {
       expect(screen.queryAllByRole("alert")[0]).toBeOnTheScreen()
     );
   });
+
+  it("should submit and cleanup errors after a failed submission when resubmitted with valid values", async () => {
+    const handleSubmit = jest.fn();
+    render(<SearchForm onSubmit={handleSubmit} />);
+    const repositoryOwnerInput = screen.getByLabelText("Repository owner");
+    const repositoryNameInput = screen.getByLabelText("Repository name");
+    const searchButton = screen.getByLabelText("Search");
+    fireEvent.press(searchButton);
+    await waitFor(() =>
+      expect(screen.queryAllByRole("alert")[0]).toBeOnTheScreen()
+    );
+
+    const owner = "facebook";
+    const name = "react";
+
+    fireEvent.changeText(repositoryOwnerInput, owner);
+    fireEvent.changeText(repositoryNameInput, name);
+    fireEvent.press(searchButton);
+
+    await waitFor(() => {
+      expect(screen.queryByRole("alert")).not.toBeOnTheScreen();
+      expect(handleSubmit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          repositoryOwner: owner,
+          repositoryName: name,
+        })
+      );
+    });
+  });
 });
