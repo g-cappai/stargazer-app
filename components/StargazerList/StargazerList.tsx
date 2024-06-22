@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { ListItem } from "./ListItem";
 
 interface StargazerListProps {
   stargazers: { id: number; avatarUrl: string; name: string }[];
@@ -17,7 +18,9 @@ export function StargazerList({
       accessibilityRole="list"
       aria-label="Stargazers list"
       data={stargazers}
-      renderItem={({ item }) => <View testID="stargazersListItem" />}
+      renderItem={({ item: { avatarUrl, name } }) => (
+        <ListItem avatarUrl={avatarUrl} userName={name} />
+      )}
       onEndReached={loadMore}
       ListEmptyComponent={<View accessibilityLabel="No stargazers found" />}
       ListFooterComponent={
