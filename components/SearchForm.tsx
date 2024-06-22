@@ -1,13 +1,53 @@
 import { View } from "react-native";
 import { Input } from "./Input";
 import { Button } from "./Button";
+import { Controller, useForm } from "react-hook-form";
 
-export function SearchForm() {
+interface SearchFormProps {
+  onSubmit: (formValues: SearchFormValues) => void;
+}
+
+interface SearchFormValues {
+  repositoryOwner: string;
+  repositoryName: string;
+}
+
+export function SearchForm({ onSubmit }: SearchFormProps) {
+  const { control, handleSubmit } = useForm<SearchFormValues>({
+    defaultValues: {
+      repositoryOwner: "",
+      repositoryName: "",
+    },
+  });
+
   return (
     <View>
-      <Input label="Repository owner" />
-      <Input label="Repository name" />
-      <Button label="Search" />
+      <Controller
+        control={control}
+        render={({ field }) => (
+          <Input
+            label="Repository owner"
+            onChange={field.onChange}
+            value={field.value}
+          />
+        )}
+        name="repositoryOwner"
+      />
+      <Controller
+        control={control}
+        render={({ field }) => (
+          <Input
+            label="Repository name"
+            onChange={field.onChange}
+            value={field.value}
+          />
+        )}
+        name="repositoryName"
+      />
+      <Button
+        label="Search"
+        onPress={handleSubmit((formData) => onSubmit(formData))}
+      />
     </View>
   );
 }
