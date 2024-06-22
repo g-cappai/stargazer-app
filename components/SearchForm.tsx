@@ -13,7 +13,11 @@ interface SearchFormValues {
 }
 
 export function SearchForm({ onSubmit }: SearchFormProps) {
-  const { control, handleSubmit } = useForm<SearchFormValues>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SearchFormValues>({
     defaultValues: {
       repositoryOwner: "",
       repositoryName: "",
@@ -29,6 +33,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
             label="Repository owner"
             onChange={field.onChange}
             value={field.value}
+            errorMessage={errors.repositoryOwner?.message}
           />
         )}
         name="repositoryOwner"
@@ -41,6 +46,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
             label="Repository name"
             onChange={field.onChange}
             value={field.value}
+            errorMessage={errors.repositoryName?.message}
           />
         )}
         name="repositoryName"
