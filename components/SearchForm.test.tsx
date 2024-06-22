@@ -41,4 +41,15 @@ describe("SearchForm component", () => {
       )
     );
   });
+
+  it("should not submit form if invalid", async () => {
+    const handleSubmit = jest.fn();
+    render(<SearchForm onSubmit={handleSubmit} />);
+    const searchButton = screen.getByLabelText("Search");
+
+    fireEvent.press(searchButton);
+    await waitFor(() => {
+      expect(handleSubmit).not.toHaveBeenCalled();
+    });
+  });
 });
