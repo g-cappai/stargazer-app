@@ -55,6 +55,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
       <Button
         label="Search"
         onPress={handleSubmit((formData) => onSubmit(formData))}
+        title="Search"
       />
     </View>
   );
