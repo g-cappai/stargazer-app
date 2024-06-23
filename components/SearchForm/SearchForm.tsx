@@ -12,6 +12,12 @@ interface SearchFormValues {
   repositoryName: string;
 }
 
+export const SearchFormLabels = {
+  repositoryOwner: "Owner",
+  repositoryName: "Repository",
+  search: "Search",
+};
+
 export function SearchForm({ onSubmit }: SearchFormProps) {
   const {
     control,
@@ -31,7 +37,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         render={({ field }) => (
           <Input
             placeholder="facebook"
-            label="Owner"
+            label={SearchFormLabels.repositoryOwner}
             onChange={field.onChange}
             value={field.value}
             error={!!errors.repositoryOwner}
@@ -45,7 +51,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         render={({ field }) => (
           <Input
             placeholder="react"
-            label="Repository"
+            label={SearchFormLabels.repositoryName}
             onChange={field.onChange}
             value={field.value}
             error={!!errors.repositoryName}
@@ -55,7 +61,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         rules={{ required: true }}
       />
       <Button
-        label="Search"
+        label={SearchFormLabels.search}
         onPress={handleSubmit((formData) => onSubmit(formData))}
         title="Search"
       />
