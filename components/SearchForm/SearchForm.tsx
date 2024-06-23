@@ -30,6 +30,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         control={control}
         render={({ field }) => (
           <Input
+            placeholder="Owner"
             label="Repository owner"
             onChange={field.onChange}
             value={field.value}
@@ -43,6 +44,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         control={control}
         render={({ field }) => (
           <Input
+            placeholder="Repository"
             label="Repository name"
             onChange={field.onChange}
             value={field.value}
