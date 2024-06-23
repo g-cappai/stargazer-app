@@ -11,7 +11,7 @@ describe("SearchForm component", () => {
     render(<SearchForm onSubmit={() => {}} />);
     const repositoryOwnerInput = screen.getByLabelText("Repository owner");
     const repositoryNameInput = screen.getByLabelText("Repository name");
-    const searchButton = screen.getByLabelText("Search");
+    const searchButton = screen.getByText("Search");
 
     expect(repositoryOwnerInput).toBeDefined();
     expect(repositoryNameInput).toBeDefined();
