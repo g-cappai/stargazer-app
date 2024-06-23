@@ -1,11 +1,15 @@
 import { Colors } from "@/constants/Colors";
+import { FontSize } from "@/constants/Font";
 import { Text as RNText, TextProps as RNTextProps } from "react-native";
 
 interface TextProps extends RNTextProps {}
 
-export function Text({ children, ...props }: TextProps) {
+export function Text({ children, style, ...props }: TextProps) {
   return (
-    <RNText style={{ color: Colors.text }} {...props}>
+    <RNText
+      style={[{ color: Colors.text, fontSize: FontSize.m }, style]}
+      {...props}
+    >
       {children}
     </RNText>
   );
