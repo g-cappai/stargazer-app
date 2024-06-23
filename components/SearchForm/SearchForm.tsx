@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import { Input } from "../shared";
 import { Button } from "../shared";
 import { Controller, useForm } from "react-hook-form";
@@ -63,7 +63,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
       />
       <Button
         label={SearchFormLabels.search}
-        onPress={handleSubmit((formData) => onSubmit(formData))}
+        onPress={handleSubmit((formData) => {
+          Keyboard.dismiss();
+          onSubmit(formData);
+        })}
         title="Search"
       />
     </View>
