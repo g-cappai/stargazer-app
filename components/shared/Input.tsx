@@ -35,9 +35,6 @@ export function Input({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: Spacing.m,
-  },
   input: {
     borderBottomWidth: 1,
     borderColor: Colors.border,
