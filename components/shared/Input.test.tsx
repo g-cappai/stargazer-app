@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react-native";
 import { Input } from "./Input";
+import { Colors } from "@/constants/Colors";
 
 describe("Input component", () => {
   it("should render an input element", () => {
@@ -8,14 +9,16 @@ describe("Input component", () => {
     expect(input).toBeOnTheScreen();
   });
 
-  it("should render an helper text if there's an error", () => {
+  it("should show a red border if there's an error", () => {
     const { rerender } = render(<Input label="inputLabel" />);
-    const helperText = screen.queryByRole("alert");
-    expect(helperText).toBeNull();
+    expect(screen.queryByLabelText("inputLabel")).toHaveStyle({
+      borderColor: Colors.border,
+    });
 
-    rerender(<Input label="inputLabel" errorMessage="error" />);
-    const errorText = screen.queryByRole("alert");
-    expect(errorText).toHaveTextContent("error");
+    rerender(<Input label="inputLabel" error={true} />);
+    expect(screen.queryByLabelText("inputLabel")).toHaveStyle({
+      borderColor: Colors.alert,
+    });
   });
 
   it("should display text passed as value", () => {
