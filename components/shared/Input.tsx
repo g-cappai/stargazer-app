@@ -1,5 +1,4 @@
 import { Colors } from "@/constants/Colors";
-import { Spacing } from "@/constants/Spacing";
 import { StyleSheet, TextInput, View } from "react-native";
 import { Text } from "./Text";
 import { FontSize } from "@/constants/Font";
@@ -20,7 +19,7 @@ export function Input({
   error,
 }: InputProps) {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         placeholderTextColor={Colors.textSecondary}
