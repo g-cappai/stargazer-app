@@ -1,7 +1,8 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Input } from "../shared";
 import { Button } from "../shared";
 import { Controller, useForm } from "react-hook-form";
+import { Spacing } from "@/constants/Spacing";
 
 interface SearchFormProps {
   onSubmit: (formValues: SearchFormValues) => void;
@@ -31,7 +32,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
   });
 
   return (
-    <View>
+    <View style={styles.container}>
       <Controller
         control={control}
         render={({ field }) => (
@@ -68,3 +69,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: Spacing.l,
+    marginHorizontal: Spacing.m,
+  },
+});
