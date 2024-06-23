@@ -5,6 +5,7 @@ import {
   waitFor,
 } from "@testing-library/react-native";
 import { SearchForm } from "./SearchForm";
+import { Colors } from "@/constants/Colors";
 
 describe("SearchForm component", () => {
   it("should render a search form", () => {
@@ -53,18 +54,6 @@ describe("SearchForm component", () => {
     });
   });
 
-  it("should show helper text if invalid submission", async () => {
-    const handleSubmit = jest.fn();
-    render(<SearchForm onSubmit={handleSubmit} />);
-    const searchButton = screen.getByLabelText("Search");
-    expect(screen.queryByRole("alert")).not.toBeOnTheScreen();
-
-    fireEvent.press(searchButton);
-    await waitFor(() =>
-      expect(screen.queryAllByRole("alert")[0]).toBeOnTheScreen()
-    );
-  });
-
   it("should submit and cleanup errors after a failed submission when resubmitted with valid values", async () => {
     const handleSubmit = jest.fn();
     render(<SearchForm onSubmit={handleSubmit} />);
@@ -72,9 +61,10 @@ describe("SearchForm component", () => {
     const repositoryNameInput = screen.getByLabelText("Repository name");
     const searchButton = screen.getByLabelText("Search");
     fireEvent.press(searchButton);
-    await waitFor(() =>
-      expect(screen.queryAllByRole("alert")[0]).toBeOnTheScreen()
-    );
+    await waitFor(() => {
+      expect(repositoryOwnerInput).toHaveStyle({ borderColor: Colors.alert });
+      expect(repositoryNameInput).toHaveStyle({ borderColor: Colors.alert });
+    });
 
     const owner = "facebook";
     const name = "react";
@@ -84,7 +74,9 @@ describe("SearchForm component", () => {
     fireEvent.press(searchButton);
 
     await waitFor(() => {
-      expect(screen.queryByRole("alert")).not.toBeOnTheScreen();
+      expect(repositoryOwnerInput).toHaveStyle({ borderColor: Colors.border });
+      expect(repositoryNameInput).toHaveStyle({ borderColor: Colors.border });
+
       expect(handleSubmit).toHaveBeenCalledWith(
         expect.objectContaining({
           repositoryOwner: owner,
