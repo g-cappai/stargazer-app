@@ -14,7 +14,7 @@ export default function RootLayout() {
         statusBarColor: Colors.bgDefault,
         statusBarStyle: "light",
         contentStyle: {
-          backgroundColor: Colors.bgDefault,
+          backgroundColor: Colors.bgDark,
         },
         navigationBarColor: Colors.bgDark,
       }}
