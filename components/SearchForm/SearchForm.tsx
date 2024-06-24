@@ -3,6 +3,7 @@ import { Input } from "../shared";
 import { Button } from "../shared";
 import { Controller, useForm } from "react-hook-form";
 import { Spacing } from "@/constants/Spacing";
+import { Colors } from "@/constants/Colors";
 
 interface SearchFormProps {
   onSubmit: (formValues: SearchFormValues) => void;
@@ -76,6 +77,8 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
 const styles = StyleSheet.create({
   container: {
     gap: Spacing.l,
-    marginHorizontal: Spacing.m,
+    paddingHorizontal: Spacing.m,
+    paddingBottom: Spacing.l,
+    backgroundColor: Colors.bgDefault,
   },
 });
