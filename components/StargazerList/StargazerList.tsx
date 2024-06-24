@@ -1,5 +1,4 @@
-import { ActivityIndicator, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { ActivityIndicator, FlatList } from "react-native";
 import { ListItem } from "./ListItem";
 import { ListEmpty } from "./ListEmpty";
 
@@ -16,6 +15,7 @@ export function StargazerList({
 }: StargazerListProps) {
   return (
     <FlatList
+      contentContainerStyle={{ flexGrow: 1 }}
       accessibilityRole="list"
       aria-label="Stargazers list"
       data={stargazers}
