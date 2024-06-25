@@ -37,7 +37,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
    * @param {string} value - The input value.
    * @returns {string} - The input value without leading or trailing whitespace.
    */
-  const trimInput = (value: string) => value.trim();
+  const trimInput = (value: string): string => value.trim();
 
   return (
     <View style={styles.container}>
