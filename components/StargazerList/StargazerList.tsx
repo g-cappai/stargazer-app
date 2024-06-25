@@ -1,9 +1,10 @@
 import { ActivityIndicator, FlatList } from "react-native";
 import { ListItem } from "./ListItem";
 import { ListEmpty } from "./ListEmpty";
+import { Stargazer } from "@/api/useStargazers";
 
 interface StargazerListProps {
-  stargazers: { id: number; avatarUrl: string; name: string }[];
+  stargazers: Stargazer[];
   isLoadingMore?: boolean;
   loadMore?: () => void;
 }
