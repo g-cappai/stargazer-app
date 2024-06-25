@@ -8,7 +8,7 @@ export enum SearchStatus {
 }
 
 interface SearchStatusIndicatorProps {
-  status: SearchStatus;
+  status: SearchStatus | null;
   renderIdle: () => ReactNode;
   renderLoading: () => ReactNode;
   renderError: () => ReactNode;
@@ -30,6 +30,10 @@ export function SearchStatusIndicator({
         return renderError();
     }
   };
+
+  if (!status) {
+    return null;
+  }
 
   return <View style={styles.container}>{getContent()}</View>;
 }

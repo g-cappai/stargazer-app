@@ -46,4 +46,22 @@ describe("SearchStatusIndicator component", () => {
     expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
     expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
   });
+
+  it("does not render when status is null", () => {
+    const renderError = () => <View testID="error" />;
+    const renderIdle = () => <View testID="idle" />;
+    const renderLoading = () => <View testID="loading" />;
+    render(
+      <SearchStatusIndicator
+        status={null}
+        renderError={renderError}
+        renderIdle={renderIdle}
+        renderLoading={renderLoading}
+      />
+    );
+
+    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
+    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
+    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
+  });
 });
