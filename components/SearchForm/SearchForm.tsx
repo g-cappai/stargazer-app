@@ -32,6 +32,13 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
     },
   });
 
+  /**
+   * Strip whitespace from the input value.
+   * @param {string} value - The input value.
+   * @returns {string} - The input value without leading or trailing whitespace.
+   */
+  const trimInput = (value: string) => value.trim();
+
   return (
     <View style={styles.container}>
       <Controller
@@ -40,7 +47,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           <Input
             placeholder="facebook"
             label={SearchFormLabels.repositoryOwner}
-            onChange={field.onChange}
+            onChange={(v) => field.onChange(trimInput(v))}
             value={field.value}
             error={!!errors.repositoryOwner}
           />
@@ -54,7 +61,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           <Input
             placeholder="react"
             label={SearchFormLabels.repositoryName}
-            onChange={field.onChange}
+            onChange={(v) => field.onChange(trimInput(v))}
             value={field.value}
             error={!!errors.repositoryName}
           />
