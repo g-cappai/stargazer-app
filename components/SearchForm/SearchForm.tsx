@@ -39,6 +39,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
    */
   const trimInput = (value: string): string => value.trim();
 
+  /**
+   * NOTE: Validation is superfluous in this form.
+   * Disabling the submit button in case the values are empty may be an alternative.
+   */
   return (
     <View style={styles.container}>
       <Controller
