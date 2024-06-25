@@ -111,4 +111,25 @@ describe("SearchForm component", () => {
       );
     });
   });
+
+  it("should trim input values", async () => {
+    const handleSubmit = jest.fn();
+    render(<SearchForm onSubmit={handleSubmit} />);
+    const repositoryOwnerInput = screen.getByLabelText(
+      SearchFormLabels.repositoryOwner
+    );
+    const repositoryNameInput = screen.getByLabelText(
+      SearchFormLabels.repositoryName
+    );
+
+    const user = userEvent.setup();
+    await user.type(repositoryOwnerInput, "  facebook ");
+    await user.type(repositoryNameInput, "  react ");
+
+    await waitFor(() => {
+      screen.debug();
+      expect(repositoryOwnerInput).toHaveProp("value", "facebook");
+      expect(repositoryNameInput).toHaveProp("value", "react");
+    });
+  });
 });
