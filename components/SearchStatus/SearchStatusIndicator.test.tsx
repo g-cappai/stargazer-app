@@ -1,35 +1,49 @@
 import React from "react";
 import { render, screen } from "@testing-library/react-native";
 import { SearchStatusIndicator, SearchStatus } from "./SearchStatusIndicator";
+import { View } from "react-native";
 
 describe("SearchStatusIndicator component", () => {
-  test("renders idle state correctly", () => {
-    render(<SearchStatusIndicator status={SearchStatus.IDLE} />);
-    expect(screen.getByTestId("idleStatus")).toBeOnTheScreen();
-  });
-
-  test("renders loading state correctly", () => {
-    const { getByText, getByTestId } = render(
-      <SearchStatusIndicator status={SearchStatus.LOADING} />
-    );
-    expect(screen.getByTestId("loadingStatus")).toBeOnTheScreen();
-  });
-
-  test("renders error state with default message correctly", () => {
-    const { getByText } = render(
-      <SearchStatusIndicator status={SearchStatus.ERROR} />
-    );
-    expect(screen.getByTestId("errorStatus")).toBeOnTheScreen();
-  });
-
-  test("renders error state with custom message correctly", () => {
-    const customErrorMessage = "Custom error message";
-    const { getByText } = render(
+  test("renders states correctly", () => {
+    const renderError = () => <View testID="error" />;
+    const renderIdle = () => <View testID="idle" />;
+    const renderLoading = () => <View testID="loading" />;
+    const { rerender } = render(
       <SearchStatusIndicator
-        status={SearchStatus.ERROR}
-        errorMessage={customErrorMessage}
+        status={SearchStatus.IDLE}
+        renderError={renderError}
+        renderIdle={renderIdle}
+        renderLoading={renderLoading}
       />
     );
-    expect(getByText(customErrorMessage)).toBeTruthy();
+    expect(screen.getByTestId("idle")).toBeOnTheScreen();
+    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
+    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
+
+    rerender(
+      <SearchStatusIndicator
+        status={SearchStatus.LOADING}
+        renderError={renderError}
+        renderIdle={renderIdle}
+        renderLoading={renderLoading}
+      />
+    );
+
+    expect(screen.getByTestId("loading")).toBeOnTheScreen();
+    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
+    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
+
+    rerender(
+      <SearchStatusIndicator
+        status={SearchStatus.ERROR}
+        renderError={renderError}
+        renderIdle={renderIdle}
+        renderLoading={renderLoading}
+      />
+    );
+
+    expect(screen.getByTestId("error")).toBeOnTheScreen();
+    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
+    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
   });
 });
