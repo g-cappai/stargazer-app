@@ -127,7 +127,6 @@ describe("SearchForm component", () => {
     await user.type(repositoryNameInput, "  react ");
 
     await waitFor(() => {
-      screen.debug();
       expect(repositoryOwnerInput).toHaveProp("value", "facebook");
       expect(repositoryNameInput).toHaveProp("value", "react");
     });
