@@ -9,7 +9,7 @@ export interface Stargazer {
 }
 
 type UseStargazersResponse =
-  Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"]["data"];
+  Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"];
 
 type RequestError = {
   message: string;
@@ -38,7 +38,7 @@ export function useStargazers({
   owner,
   repo,
 }: UseStargazersParams): UseQueryResult<Stargazer[], RequestError> {
-  return useQuery<UseStargazersResponse, RequestError, Stargazer[]>({
+  return useQuery<UseStargazersResponse["data"], RequestError, Stargazer[]>({
     queryKey: ["stargazers", owner, repo],
     enabled: !!owner && !!repo,
     queryFn: async () => {
@@ -59,6 +59,7 @@ export function useStargazers({
 
       return response.json();
     },
+
     select: (data) =>
       /**
        * Most of the data returned by the API is not useful for this application.
