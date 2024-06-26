@@ -19,28 +19,20 @@ describe("SearchForm component", () => {
 
   it("should render a search form", () => {
     render(<SearchForm onSubmit={() => {}} />);
-    const repositoryOwnerInput = screen.getByLabelText(
-      SearchFormLabels.repositoryOwner
-    );
-    const repositoryNameInput = screen.getByLabelText(
-      SearchFormLabels.repositoryName
-    );
+    const repositoryOwnerInput = screen.getByLabelText(SearchFormLabels.owner);
+    const repoInput = screen.getByLabelText(SearchFormLabels.repo);
     const searchButton = screen.getByText(SearchFormLabels.search);
 
     expect(repositoryOwnerInput).toBeDefined();
-    expect(repositoryNameInput).toBeDefined();
+    expect(repoInput).toBeDefined();
     expect(searchButton).toBeDefined();
   });
 
   it("should submit form if valid when search button is pressed", async () => {
     const handleSubmit = jest.fn();
     render(<SearchForm onSubmit={handleSubmit} />);
-    const repositoryOwnerInput = screen.getByLabelText(
-      SearchFormLabels.repositoryOwner
-    );
-    const repositoryNameInput = screen.getByLabelText(
-      SearchFormLabels.repositoryName
-    );
+    const repositoryOwnerInput = screen.getByLabelText(SearchFormLabels.owner);
+    const repoInput = screen.getByLabelText(SearchFormLabels.repo);
     const searchButton = screen.getByLabelText(SearchFormLabels.search);
 
     const owner = "facebook";
@@ -48,14 +40,14 @@ describe("SearchForm component", () => {
 
     const user = userEvent.setup();
     await user.type(repositoryOwnerInput, owner);
-    await user.type(repositoryNameInput, name);
+    await user.type(repoInput, name);
     await user.press(searchButton);
 
     await waitFor(() =>
       expect(handleSubmit).toHaveBeenCalledWith(
         expect.objectContaining({
-          repositoryOwner: owner,
-          repositoryName: name,
+          owner: owner,
+          repo: name,
         })
       )
     );
@@ -77,36 +69,32 @@ describe("SearchForm component", () => {
   it("should submit and cleanup errors after a failed submission when resubmitted with valid values", async () => {
     const handleSubmit = jest.fn();
     render(<SearchForm onSubmit={handleSubmit} />);
-    const repositoryOwnerInput = screen.getByLabelText(
-      SearchFormLabels.repositoryOwner
-    );
-    const repositoryNameInput = screen.getByLabelText(
-      SearchFormLabels.repositoryName
-    );
+    const repositoryOwnerInput = screen.getByLabelText(SearchFormLabels.owner);
+    const repoInput = screen.getByLabelText(SearchFormLabels.repo);
     const searchButton = screen.getByLabelText(SearchFormLabels.search);
 
     const user = userEvent.setup();
     await user.press(searchButton);
     await waitFor(() => {
       expect(repositoryOwnerInput).toHaveStyle({ borderColor: Colors.alert });
-      expect(repositoryNameInput).toHaveStyle({ borderColor: Colors.alert });
+      expect(repoInput).toHaveStyle({ borderColor: Colors.alert });
     });
 
     const owner = "facebook";
     const name = "react";
 
     await user.type(repositoryOwnerInput, owner);
-    await user.type(repositoryNameInput, name);
+    await user.type(repoInput, name);
     await user.press(searchButton);
 
     await waitFor(() => {
       expect(repositoryOwnerInput).toHaveStyle({ borderColor: Colors.border });
-      expect(repositoryNameInput).toHaveStyle({ borderColor: Colors.border });
+      expect(repoInput).toHaveStyle({ borderColor: Colors.border });
 
       expect(handleSubmit).toHaveBeenCalledWith(
         expect.objectContaining({
-          repositoryOwner: owner,
-          repositoryName: name,
+          owner: owner,
+          repo: name,
         })
       );
     });
@@ -115,20 +103,16 @@ describe("SearchForm component", () => {
   it("should trim input values", async () => {
     const handleSubmit = jest.fn();
     render(<SearchForm onSubmit={handleSubmit} />);
-    const repositoryOwnerInput = screen.getByLabelText(
-      SearchFormLabels.repositoryOwner
-    );
-    const repositoryNameInput = screen.getByLabelText(
-      SearchFormLabels.repositoryName
-    );
+    const repositoryOwnerInput = screen.getByLabelText(SearchFormLabels.owner);
+    const repoInput = screen.getByLabelText(SearchFormLabels.repo);
 
     const user = userEvent.setup();
     await user.type(repositoryOwnerInput, "  facebook ");
-    await user.type(repositoryNameInput, "  react ");
+    await user.type(repoInput, "  react ");
 
     await waitFor(() => {
       expect(repositoryOwnerInput).toHaveProp("value", "facebook");
-      expect(repositoryNameInput).toHaveProp("value", "react");
+      expect(repoInput).toHaveProp("value", "react");
     });
   });
 });
