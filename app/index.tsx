@@ -19,8 +19,7 @@ export default function Index() {
 
   /**
    * Get the status of the search based on useStargazers state.
-   *
-   * Success case is handled by StargzerList.
+   * (Success case is handled by StargzerList.)
    *
    * @returns {SearchStatus} - The status of the search.
    */
