@@ -43,11 +43,7 @@ export default function Index() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={{ flex: 1 }}>
-        <SearchForm
-          onSubmit={({ repositoryName, repositoryOwner }) => {
-            setSearchData({ owner: repositoryOwner, repo: repositoryName });
-          }}
-        />
+        <SearchForm onSubmit={setSearchData} />
         {isSuccess ? (
           <StargazerList stargazers={data!} />
         ) : (
