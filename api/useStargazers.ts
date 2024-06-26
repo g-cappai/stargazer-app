@@ -47,6 +47,8 @@ export function useStargazers({
         {
           headers: {
             "User-Agent": "stargazers-viewer",
+            Accept: "application/vnd.github+json",
+            "X-GitHub-Api-Version:": "2022-11-28",
           },
         }
       );
