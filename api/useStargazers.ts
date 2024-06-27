@@ -3,7 +3,10 @@ import {
   useInfiniteQuery,
 } from "@tanstack/react-query";
 import { Endpoints } from "@octokit/types";
-import { Api } from "@/constants/Api";
+import { apiConfig } from "./apiConfig";
+import { queryKeys } from "./queryKeys";
+import { paginatedFetch } from "./paginatedFetch";
+import { PaginatedFetchReturn } from "./paginatedFetch/paginatedFetch";
 
 export interface Stargazer {
   id: number;
@@ -11,10 +14,8 @@ export interface Stargazer {
   name: string;
 }
 
-type UseStargazersResponse = {
-  stargazers: Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"]["data"];
-  nextPage?: string;
-};
+type ApiResponse =
+  Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"]["data"];
 
 type RequestError = {
   message: string;
@@ -28,41 +29,36 @@ interface UseStargazersParams {
 }
 
 /**
- * Query key factory.
- * Helps to avoid hardcoding the query key, preventing errors and making it easier to refactor.
+ * Fetches stargazers for a given repository.
  *
- * https://tkdodo.eu/blog/effective-react-query-keys#use-query-key-factories
+ * _Note: Unauthenticated requests have stricter [rate limit](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users).
+ * However, considering the purpose of this code, it is sufficient._
  *
+ * @param {UseStargazersParams} params - The owner and name of the repository.
+ * @param {string} params.owner - The owner of the repository.
+ * @param {string} params.repo - The name of the repository.
+ * @returns {UseInfiniteQueryResult<UseStargazersReturn, RequestError>} - The result of the query.
  */
 
-const queryKeys = {
-  all: (owner: string, repo: string) => ["stargazers", owner, repo] as const,
-};
-
-type Links = {
-  next?: string;
-  prev?: string;
-  last?: string;
-  first?: string;
-};
-
-/**
- * Extracts links from the `Link` header.
- * @param linkHeader - The `Link` header from Github API.
- * @returns {Links} - An object containing the links.
- */
-const getLinks = (linkHeader: string | null): Links => {
-  if (!linkHeader) {
-    return {};
-  }
-
-  const links = [...(linkHeader?.matchAll(/<(.+?)>;\srel="(.+?)"/gm) || [])];
-
-  return links.reduce((acc, curr) => {
-    acc[curr?.[2] as string] = curr?.[1] as string;
-    return acc;
-  }, {} as Record<string, string>);
-};
+export function useStargazers({
+  owner,
+  repo,
+}: UseStargazersParams): UseInfiniteQueryResult<Stargazer[][], RequestError> {
+  return useInfiniteQuery<
+    PaginatedFetchReturn<ApiResponse>,
+    RequestError,
+    Stargazer[][],
+    ReturnType<typeof queryKeys.all>,
+    string
+  >({
+    initialPageParam: `${apiConfig.baseUrl}/repos/${owner}/${repo}/stargazers`,
+    getNextPageParam: (lastPage) => lastPage.next,
+    queryKey: queryKeys.all(owner, repo),
+    enabled: !!owner && !!repo,
+    select,
+    queryFn: ({ pageParam: url }) => paginatedFetch<ApiResponse>(url),
+  });
+}
 
 /**
  * Most of the data returned by the API is not useful for this application.
@@ -73,10 +69,13 @@ const getLinks = (linkHeader: string | null): Links => {
  * @param {UseStargazersResponse[]} data - The data returned by the queryFn.
  * @returns {Stargazer[][]} - The filtered data.
  */
-const select = (data: { pages: UseStargazersResponse[] }): Stargazer[][] =>
-  data.pages.map(
+
+function select(data: {
+  pages: PaginatedFetchReturn<ApiResponse>[];
+}): Stargazer[][] {
+  return data.pages.map(
     (page) =>
-      page.stargazers
+      page.data
         .map((stargazer) => {
           if ("user" in stargazer && stargazer.user !== null) {
             return {
@@ -98,55 +97,4 @@ const select = (data: { pages: UseStargazersResponse[] }): Stargazer[][] =>
         })
         .filter(Boolean) as Stargazer[]
   );
-
-/**
- * Fetches stargazers for a given repository.
- *
- * _Note: Unauthenticated requests have stricter [rate limit](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users).
- * However, considering the purpose of this code, it is sufficient._
- *
- * @param {UseStargazersParams} params - The owner and name of the repository.
- * @param {string} params.owner - The owner of the repository.
- * @param {string} params.repo - The name of the repository.
- * @returns {UseInfiniteQueryResult<UseStargazersReturn, RequestError>} - The result of the query.
- */
-
-export function useStargazers({
-  owner,
-  repo,
-}: UseStargazersParams): UseInfiniteQueryResult<Stargazer[][], RequestError> {
-  return useInfiniteQuery<
-    UseStargazersResponse,
-    RequestError,
-    Stargazer[][],
-    ReturnType<typeof queryKeys.all>,
-    string
-  >({
-    initialPageParam: `${Api.domain.github}/repos/${owner}/${repo}/stargazers`,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
-    queryKey: queryKeys.all(owner, repo),
-    enabled: !!owner && !!repo,
-    queryFn: async ({ pageParam }) => {
-      const response = await fetch(pageParam, {
-        headers: {
-          "User-Agent": "stargazers-viewer",
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
-      });
-
-      if (!response.ok) {
-        throw await response.json();
-      }
-
-      const body = await response.json();
-      const links = getLinks(response.headers.get("Link"));
-
-      return {
-        stargazers: body,
-        nextPage: links.next,
-      };
-    },
-    select,
-  });
 }

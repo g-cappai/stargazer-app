@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { useStargazers } from "./useStargazers";
 import { renderHook } from "@testing-library/react-hooks";
 import nock from "nock";
-import { Api } from "@/constants/Api";
+import { apiConfig } from "./apiConfig";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +38,7 @@ describe("useStargazers hook", () => {
       },
     ];
 
-    nock(Api.domain.github)
+    nock(apiConfig.baseUrl)
       .get("/repos/owner/repo/stargazers")
       .reply(200, fakeData);
 
