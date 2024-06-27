@@ -49,18 +49,20 @@ describe("useStargazers hook", () => {
 
     await waitFor(() => result.current.isSuccess);
 
-    expect(result.current.data).toHaveLength(2);
+    expect(result.current.data?.[0]).toHaveLength(2);
     expect(result.current.data).toEqual([
-      {
-        id: 1,
-        avatarUrl: "https://example.com",
-        name: "octokit",
-      },
-      {
-        id: 2,
-        avatarUrl: "https://example.com",
-        name: "octokit",
-      },
+      [
+        {
+          id: 1,
+          avatarUrl: "https://example.com",
+          name: "octokit",
+        },
+        {
+          id: 2,
+          avatarUrl: "https://example.com",
+          name: "octokit",
+        },
+      ],
     ]);
   });
 });
