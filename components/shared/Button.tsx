@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Text } from "./Text";
-import { Colors } from "@/constants/Colors";
-import { Spacing } from "@/constants/Spacing";
-import { FontSize } from "@/constants/Font";
+import { Colors } from "@/theme/Colors";
+import { Spacing } from "@/theme/Spacing";
+import { FontSize } from "@/theme/Font";
 
 interface ButtonProps {
   onPress?: () => void;

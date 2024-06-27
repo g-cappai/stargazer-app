@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/Colors";
-import { FontSize } from "@/constants/Font";
+import { Colors } from "@/theme/Colors";
+import { FontSize } from "@/theme/Font";
 import { Text as RNText, TextProps as RNTextProps } from "react-native";
 
 interface TextProps extends RNTextProps {}

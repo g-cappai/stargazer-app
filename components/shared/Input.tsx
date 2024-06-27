@@ -1,7 +1,7 @@
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/theme/Colors";
 import { StyleSheet, TextInput, View } from "react-native";
 import { Text } from "./Text";
-import { FontSize } from "@/constants/Font";
+import { FontSize } from "@/theme/Font";
 
 interface InputProps {
   label?: string;

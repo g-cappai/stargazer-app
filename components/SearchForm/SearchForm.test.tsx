@@ -5,7 +5,7 @@ import {
   waitFor,
 } from "@testing-library/react-native";
 import { SearchForm, SearchFormLabels } from "./SearchForm";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/theme/Colors";
 
 describe("SearchForm component", () => {
   beforeEach(() => {

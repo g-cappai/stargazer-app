@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react-native";
 import { Input } from "./Input";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/theme/Colors";
 
 describe("Input component", () => {
   it("should render an input element", () => {

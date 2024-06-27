@@ -2,8 +2,8 @@ import { Keyboard, StyleSheet, View } from "react-native";
 import { Input } from "../shared";
 import { Button } from "../shared";
 import { Controller, useForm } from "react-hook-form";
-import { Spacing } from "@/constants/Spacing";
-import { Colors } from "@/constants/Colors";
+import { Spacing } from "@/theme/Spacing";
+import { Colors } from "@/theme/Colors";
 
 interface SearchFormProps {
   onSubmit: (formValues: SearchFormValues) => void;

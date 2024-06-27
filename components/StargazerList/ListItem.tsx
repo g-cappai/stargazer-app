@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from "react-native";
 import { Text } from "../shared/Text";
-import { Spacing } from "@/constants/Spacing";
+import { Spacing } from "@/theme/Spacing";
 import { memo } from "react";
 
 interface ListItemProps {

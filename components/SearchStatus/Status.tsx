@@ -1,7 +1,7 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { Text } from "../shared/Text";
-import { FontSize } from "@/constants/Font";
-import { Spacing } from "@/constants/Spacing";
+import { FontSize } from "@/theme/Font";
+import { Spacing } from "@/theme/Spacing";
 
 export function IdleStatus() {
   return (
