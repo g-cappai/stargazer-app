@@ -20,7 +20,7 @@ export function StargazerList({
       accessibilityRole="list"
       aria-label="Stargazers list"
       data={stargazers}
-      onEndReached={loadMore}
+      onEndReached={!isLoadingMore ? loadMore : null}
       renderItem={({ item: { avatarUrl, name } }) => (
         <ListItem avatarUrl={avatarUrl} userName={name} />
       )}
