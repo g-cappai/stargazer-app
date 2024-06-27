@@ -14,8 +14,16 @@ import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 export default function Index() {
   const [searchData, setSearchData] = useState({ owner: "", repo: "" });
 
-  const { data, error, isError, isFetching, isPending, isSuccess } =
-    useStargazers({ owner: searchData.owner, repo: searchData.repo });
+  const {
+    data,
+    error,
+    fetchNextPage,
+    isFetchingNextPage,
+    isError,
+    isFetching,
+    isPending,
+    isSuccess,
+  } = useStargazers({ owner: searchData.owner, repo: searchData.repo });
 
   /**
    * Get the status of the search based on useStargazers state.
@@ -45,7 +53,11 @@ export default function Index() {
       <View style={{ flex: 1 }}>
         <SearchForm onSubmit={setSearchData} />
         {isSuccess ? (
-          <StargazerList stargazers={data!} />
+          <StargazerList
+            stargazers={data!.flat()}
+            loadMore={fetchNextPage}
+            isLoadingMore={isFetchingNextPage}
+          />
         ) : (
           <SearchStatusIndicator
             status={getSearchStatus()}
