@@ -43,19 +43,13 @@ export function useStargazers({
   owner,
   repo,
 }: UseStargazersParams): UseInfiniteQueryResult<Stargazer[][], RequestError> {
-  return useInfiniteQuery<
-    FetchPaginatedReturn<ApiResponse>,
-    RequestError,
-    Stargazer[][],
-    ReturnType<typeof queryKeys.all>,
-    string
-  >({
+  return useInfiniteQuery({
+    queryKey: queryKeys.all(owner, repo),
+    queryFn: ({ pageParam: url }) => fetchPaginated<ApiResponse>(url),
+    enabled: !!owner && !!repo,
     initialPageParam: `${apiConfig.baseUrl}/repos/${owner}/${repo}/stargazers`,
     getNextPageParam: (lastPage) => lastPage.next,
-    queryKey: queryKeys.all(owner, repo),
-    enabled: !!owner && !!repo,
     select,
-    queryFn: ({ pageParam: url }) => fetchPaginated<ApiResponse>(url),
   });
 }
 
