@@ -5,8 +5,7 @@ import {
 import { Endpoints } from "@octokit/types";
 import { apiConfig } from "./apiConfig";
 import { queryKeys } from "./queryKeys";
-import { paginatedFetch } from "./paginatedFetch";
-import { PaginatedFetchReturn } from "./paginatedFetch/paginatedFetch";
+import { fetchPaginated, FetchPaginatedReturn } from "./fetchPaginated";
 
 export interface Stargazer {
   id: number;
@@ -45,7 +44,7 @@ export function useStargazers({
   repo,
 }: UseStargazersParams): UseInfiniteQueryResult<Stargazer[][], RequestError> {
   return useInfiniteQuery<
-    PaginatedFetchReturn<ApiResponse>,
+    FetchPaginatedReturn<ApiResponse>,
     RequestError,
     Stargazer[][],
     ReturnType<typeof queryKeys.all>,
@@ -56,7 +55,7 @@ export function useStargazers({
     queryKey: queryKeys.all(owner, repo),
     enabled: !!owner && !!repo,
     select,
-    queryFn: ({ pageParam: url }) => paginatedFetch<ApiResponse>(url),
+    queryFn: ({ pageParam: url }) => fetchPaginated<ApiResponse>(url),
   });
 }
 
@@ -71,7 +70,7 @@ export function useStargazers({
  */
 
 function select(data: {
-  pages: PaginatedFetchReturn<ApiResponse>[];
+  pages: FetchPaginatedReturn<ApiResponse>[];
 }): Stargazer[][] {
   return data.pages.map(
     (page) =>

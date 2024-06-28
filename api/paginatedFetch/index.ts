@@ -1,1 +1,0 @@
-export { paginatedFetch } from "./paginatedFetch";
