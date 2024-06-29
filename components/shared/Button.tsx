@@ -18,7 +18,7 @@ export function Button({ onPress, label, disabled, title }: ButtonProps) {
       onPress={onPress}
       aria-label={label}
       disabled={disabled}
-      style={styles.button}
+      style={[styles.button, disabled && styles.disabled]}
       android_ripple={{ color: Colors.border }}
     >
       <Text style={styles.text}>{title}</Text>
@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     padding: Spacing.s,
     borderRadius: Spacing.xs,
     backgroundColor: Colors.bgLight,
+  },
+  disabled: {
+    opacity: 0.5,
   },
   text: {
     textTransform: "uppercase",
