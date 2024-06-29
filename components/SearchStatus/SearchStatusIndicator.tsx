@@ -1,47 +1,47 @@
-import { StyleSheet, View } from "react-native";
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
+import { StyleSheet, View } from 'react-native'
 
 export enum SearchStatus {
-  LOADING = "LOADING",
-  IDLE = "IDLE",
-  ERROR = "ERROR",
+  LOADING = 'LOADING',
+  IDLE = 'IDLE',
+  ERROR = 'ERROR'
 }
 
 interface SearchStatusIndicatorProps {
-  status: SearchStatus | null;
-  renderIdle: () => ReactNode;
-  renderLoading: () => ReactNode;
-  renderError: () => ReactNode;
+  status: SearchStatus | null
+  renderIdle: () => ReactNode
+  renderLoading: () => ReactNode
+  renderError: () => ReactNode
 }
 
 export function SearchStatusIndicator({
   status,
   renderIdle,
   renderLoading,
-  renderError,
+  renderError
 }: SearchStatusIndicatorProps) {
   const getContent = () => {
     switch (status) {
       case SearchStatus.LOADING:
-        return renderLoading();
+        return renderLoading()
       case SearchStatus.IDLE:
-        return renderIdle();
+        return renderIdle()
       case SearchStatus.ERROR:
-        return renderError();
+        return renderError()
     }
-  };
-
-  if (!status) {
-    return null;
   }
 
-  return <View style={styles.container}>{getContent()}</View>;
+  if (!status) {
+    return null
+  }
+
+  return <View style={styles.container}>{getContent()}</View>
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

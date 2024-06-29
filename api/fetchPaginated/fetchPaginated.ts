@@ -1,9 +1,9 @@
-import { apiConfig } from "../apiConfig";
-import { Links, getPaginationLinks } from "./getPaginationLinks";
+import { apiConfig } from '../apiConfig'
+import { Links, getPaginationLinks } from './getPaginationLinks'
 
 export type FetchPaginatedReturn<T> = {
-  data: T;
-} & Links;
+  data: T
+} & Links
 
 /**
  * Fetches data from the API and extracts pagination links from the header.
@@ -15,18 +15,18 @@ export async function fetchPaginated<T>(
   url: string
 ): Promise<FetchPaginatedReturn<T>> {
   const response = await fetch(url, {
-    headers: apiConfig.headers,
-  });
+    headers: apiConfig.headers
+  })
 
   if (!response.ok) {
-    throw await response.json();
+    throw await response.json()
   }
 
-  const body = await response.json();
-  const paginationLinks = getPaginationLinks(response.headers.get("Link"));
+  const body = await response.json()
+  const paginationLinks = getPaginationLinks(response.headers.get('Link'))
 
   return {
     data: body,
-    ...paginationLinks,
-  };
+    ...paginationLinks
+  }
 }

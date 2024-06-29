@@ -1,7 +1,7 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { Text } from "../shared/Text";
-import { FontSize } from "@/theme/Font";
-import { Spacing } from "@/theme/Spacing";
+import { FontSize } from '@/theme/Font'
+import { Spacing } from '@/theme/Spacing'
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
+import { Text } from '../shared/Text'
 
 export function IdleStatus() {
   return (
@@ -9,7 +9,7 @@ export function IdleStatus() {
       <Text style={styles.idleTextHeader}>Find stargazers.</Text>
       <Text>Search for a Github repository.</Text>
     </View>
-  );
+  )
 }
 
 export function LoadingStatus() {
@@ -18,11 +18,11 @@ export function LoadingStatus() {
       <Text style={styles.loadingText}>Looking for stargazers...</Text>
       <ActivityIndicator />
     </View>
-  );
+  )
 }
 
 interface ErrorStatusProps {
-  statusCode?: string;
+  statusCode?: string
 }
 
 export function ErrorStatus({ statusCode }: ErrorStatusProps) {
@@ -34,34 +34,34 @@ export function ErrorStatus({ statusCode }: ErrorStatusProps) {
 
   const getErrorMessage = (code?: string): string => {
     switch (code) {
-      case "404":
-        return "Repository not found.";
-      case "403":
-      case "429":
-        return "An error occurred. Please try again later.";
+      case '404':
+        return 'Repository not found.'
+      case '403':
+      case '429':
+        return 'An error occurred. Please try again later.'
       default:
-        return "An error occurred. Try again.";
+        return 'An error occurred. Try again.'
     }
-  };
+  }
 
-  return <Text>{getErrorMessage(statusCode)}</Text>;
+  return <Text>{getErrorMessage(statusCode)}</Text>
 }
 
 const styles = StyleSheet.create({
   idleTextHeader: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: FontSize.xl,
-    paddingBottom: Spacing.s,
+    paddingBottom: Spacing.s
   },
   idleTextContainer: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   loadingText: {
-    paddingRight: Spacing.s,
+    paddingRight: Spacing.s
   },
   loadingTextContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
+})

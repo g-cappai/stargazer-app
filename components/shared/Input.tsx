@@ -1,14 +1,14 @@
-import { Colors } from "@/theme/Colors";
-import { StyleSheet, TextInput, View } from "react-native";
-import { Text } from "./Text";
-import { FontSize } from "@/theme/Font";
+import { Colors } from '@/theme/Colors'
+import { FontSize } from '@/theme/Font'
+import { StyleSheet, TextInput, View } from 'react-native'
+import { Text } from './Text'
 
 interface InputProps {
-  label?: string;
-  error?: boolean;
-  value?: string;
-  placeholder?: string;
-  onChange?: (value: string) => void;
+  label?: string
+  error?: boolean
+  value?: string
+  placeholder?: string
+  onChange?: (value: string) => void
 }
 
 export function Input({
@@ -16,7 +16,7 @@ export function Input({
   placeholder,
   onChange,
   label,
-  error,
+  error
 }: InputProps) {
   return (
     <View>
@@ -30,7 +30,7 @@ export function Input({
         style={[styles.input, error && styles.inputInvalid]}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.border,
     color: Colors.text,
-    fontSize: FontSize.m,
+    fontSize: FontSize.m
   },
   inputInvalid: {
-    borderColor: Colors.alert,
+    borderColor: Colors.alert
   },
   label: {
-    fontSize: FontSize.s,
-  },
-});
+    fontSize: FontSize.s
+  }
+})

@@ -1,30 +1,27 @@
-import {
-  UseInfiniteQueryResult,
-  useInfiniteQuery,
-} from "@tanstack/react-query";
-import { Endpoints } from "@octokit/types";
-import { apiConfig } from "./apiConfig";
-import { queryKeys } from "./queryKeys";
-import { fetchPaginated, FetchPaginatedReturn } from "./fetchPaginated";
+import { Endpoints } from '@octokit/types'
+import { UseInfiniteQueryResult, useInfiniteQuery } from '@tanstack/react-query'
+import { apiConfig } from './apiConfig'
+import { FetchPaginatedReturn, fetchPaginated } from './fetchPaginated'
+import { queryKeys } from './queryKeys'
 
 export interface Stargazer {
-  id: number;
-  avatarUrl: string;
-  name: string;
+  id: number
+  avatarUrl: string
+  name: string
 }
 
 type ApiResponse =
-  Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"]["data"];
+  Endpoints['GET /repos/{owner}/{repo}/stargazers']['response']['data']
 
 type RequestError = {
-  message: string;
-  documentation_url: string;
-  status: string;
-};
+  message: string
+  documentation_url: string
+  status: string
+}
 
 interface UseStargazersParams {
-  owner: string;
-  repo: string;
+  owner: string
+  repo: string
 }
 
 /**
@@ -41,16 +38,16 @@ interface UseStargazersParams {
 
 export function useStargazers({
   owner,
-  repo,
+  repo
 }: UseStargazersParams): UseInfiniteQueryResult<Stargazer[][], RequestError> {
   return useInfiniteQuery({
     queryKey: queryKeys.all(owner, repo),
     queryFn: ({ pageParam: url }) => fetchPaginated<ApiResponse>(url),
     enabled: !!owner && !!repo,
     initialPageParam: `${apiConfig.baseUrl}/repos/${owner}/${repo}/stargazers`,
-    getNextPageParam: (lastPage) => lastPage.next,
-    select,
-  });
+    getNextPageParam: lastPage => lastPage.next,
+    select
+  })
 }
 
 /**
@@ -64,30 +61,30 @@ export function useStargazers({
  */
 
 function select(data: {
-  pages: FetchPaginatedReturn<ApiResponse>[];
+  pages: FetchPaginatedReturn<ApiResponse>[]
 }): Stargazer[][] {
   return data.pages.map(
-    (page) =>
+    page =>
       page.data
-        .map((stargazer) => {
-          if ("user" in stargazer && stargazer.user !== null) {
+        .map(stargazer => {
+          if ('user' in stargazer && stargazer.user !== null) {
             return {
               id: stargazer.user.id,
               avatarUrl: stargazer.user.avatar_url,
-              name: stargazer.user.login,
-            };
+              name: stargazer.user.login
+            }
           }
 
-          if (!("starred_at" in stargazer)) {
+          if (!('starred_at' in stargazer)) {
             return {
               id: stargazer.id,
               avatarUrl: stargazer.avatar_url,
-              name: stargazer.login,
-            };
+              name: stargazer.login
+            }
           }
 
-          return null;
+          return null
         })
         .filter(Boolean) as Stargazer[]
-  );
+  )
 }

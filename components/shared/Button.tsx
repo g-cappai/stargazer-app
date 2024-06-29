@@ -1,14 +1,14 @@
-import { Pressable, StyleSheet } from "react-native";
-import { Text } from "./Text";
-import { Colors } from "@/theme/Colors";
-import { Spacing } from "@/theme/Spacing";
-import { FontSize } from "@/theme/Font";
+import { Colors } from '@/theme/Colors'
+import { FontSize } from '@/theme/Font'
+import { Spacing } from '@/theme/Spacing'
+import { Pressable, StyleSheet } from 'react-native'
+import { Text } from './Text'
 
 interface ButtonProps {
-  onPress?: () => void;
-  title?: string;
-  label?: string;
-  disabled?: boolean;
+  onPress?: () => void
+  title?: string
+  label?: string
+  disabled?: boolean
 }
 
 export function Button({ onPress, label, disabled, title }: ButtonProps) {
@@ -23,24 +23,24 @@ export function Button({ onPress, label, disabled, title }: ButtonProps) {
     >
       <Text style={styles.text}>{title}</Text>
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   button: {
     borderColor: Colors.border,
     borderWidth: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: Spacing.s,
     borderRadius: Spacing.xs,
-    backgroundColor: Colors.bgLight,
+    backgroundColor: Colors.bgLight
   },
   disabled: {
-    opacity: 0.5,
+    opacity: 0.5
   },
   text: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     fontSize: FontSize.s,
-    letterSpacing: 1.25,
-  },
-});
+    letterSpacing: 1.25
+  }
+})

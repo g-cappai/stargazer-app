@@ -1,12 +1,12 @@
-import { ActivityIndicator, Pressable, StyleSheet, View } from "react-native";
-import { Text } from "../shared/Text";
-import { Colors } from "@/theme/Colors";
-import { Spacing } from "@/theme/Spacing";
+import { Colors } from '@/theme/Colors'
+import { Spacing } from '@/theme/Spacing'
+import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native'
+import { Text } from '../shared/Text'
 
 interface ListFooterProps {
-  isLoading?: boolean;
-  hasError?: boolean;
-  tryAgain?: () => void;
+  isLoading?: boolean
+  hasError?: boolean
+  tryAgain?: () => void
 }
 
 export function ListFooter({ isLoading, hasError, tryAgain }: ListFooterProps) {
@@ -14,7 +14,7 @@ export function ListFooter({ isLoading, hasError, tryAgain }: ListFooterProps) {
     <View style={styles.container}>
       <ActivityIndicator accessibilityLabel="Loading more" />
     </View>
-  );
+  )
 
   const retry = (
     <Pressable
@@ -27,26 +27,26 @@ export function ListFooter({ isLoading, hasError, tryAgain }: ListFooterProps) {
         <Text style={styles.tryAgain}> try again.</Text>
       </Text>
     </Pressable>
-  );
+  )
 
-  return isLoading ? loading : hasError ? retry : null;
+  return isLoading ? loading : hasError ? retry : null
 }
 
 const styles = StyleSheet.create({
   container: {
     margin: Spacing.m,
     padding: Spacing.m,
-    alignItems: "center",
+    alignItems: 'center'
   },
   alertContainer: {
     borderWidth: 1,
     borderColor: Colors.alert,
-    borderRadius: Spacing.xs,
+    borderRadius: Spacing.xs
   },
   alertMessage: {
-    textAlign: "center",
+    textAlign: 'center'
   },
   tryAgain: {
-    fontWeight: "bold",
-  },
-});
+    fontWeight: 'bold'
+  }
+})

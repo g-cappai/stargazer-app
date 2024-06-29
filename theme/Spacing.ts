@@ -3,5 +3,5 @@ export const Spacing = {
   s: 10,
   m: 15,
   l: 20,
-  xl: 25,
-} as const;
+  xl: 25
+} as const

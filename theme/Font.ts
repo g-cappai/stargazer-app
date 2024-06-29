@@ -3,5 +3,5 @@ export const FontSize = {
   m: 16,
   l: 20,
   xl: 24,
-  xxl: 32,
-} as const;
+  xxl: 32
+} as const

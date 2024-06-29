@@ -1,5 +1,5 @@
-import { StyleSheet, View } from "react-native";
-import { Text } from "../shared/Text";
+import { StyleSheet, View } from 'react-native'
+import { Text } from '../shared/Text'
 
 export function ListEmpty() {
   return (
@@ -8,13 +8,13 @@ export function ListEmpty() {
         There are no stargazers in this repository.
       </Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})

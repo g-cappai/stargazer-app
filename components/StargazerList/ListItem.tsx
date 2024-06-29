@@ -1,11 +1,11 @@
-import { Image, StyleSheet, View } from "react-native";
-import { Text } from "../shared/Text";
-import { Spacing } from "@/theme/Spacing";
-import { memo } from "react";
+import { Spacing } from '@/theme/Spacing'
+import { memo } from 'react'
+import { Image, StyleSheet, View } from 'react-native'
+import { Text } from '../shared/Text'
 
 interface ListItemProps {
-  avatarUrl: string;
-  userName: string;
+  avatarUrl: string
+  userName: string
 }
 
 export const ListItem = memo(({ avatarUrl, userName }: ListItemProps) => (
@@ -18,19 +18,21 @@ export const ListItem = memo(({ avatarUrl, userName }: ListItemProps) => (
     />
     <Text accessibilityLabel="User name">{userName}</Text>
   </View>
-));
+))
+
+ListItem.displayName = 'ListItem'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: Spacing.m,
     marginVertical: Spacing.s,
-    marginHorizontal: Spacing.m,
+    marginHorizontal: Spacing.m
   },
   avatar: {
     width: 50,
     height: 50,
-    borderRadius: 25,
-  },
-});
+    borderRadius: 25
+  }
+})

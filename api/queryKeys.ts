@@ -6,5 +6,5 @@
  */
 
 export const queryKeys = {
-  all: (owner: string, repo: string) => ["stargazers", owner, repo] as const,
-};
+  all: (owner: string, repo: string) => ['stargazers', owner, repo] as const
+}

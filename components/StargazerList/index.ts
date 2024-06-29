@@ -1,1 +1,1 @@
-export { StargazerList } from "./StargazerList";
+export { StargazerList } from './StargazerList'

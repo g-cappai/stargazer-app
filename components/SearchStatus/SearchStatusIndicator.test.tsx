@@ -1,13 +1,13 @@
-import React from "react";
-import { render, screen } from "@testing-library/react-native";
-import { SearchStatusIndicator, SearchStatus } from "./SearchStatusIndicator";
-import { View } from "react-native";
+import { render, screen } from '@testing-library/react-native'
+import React from 'react'
+import { View } from 'react-native'
+import { SearchStatus, SearchStatusIndicator } from './SearchStatusIndicator'
 
-describe("SearchStatusIndicator component", () => {
-  test("renders states correctly", () => {
-    const renderError = () => <View testID="error" />;
-    const renderIdle = () => <View testID="idle" />;
-    const renderLoading = () => <View testID="loading" />;
+describe('SearchStatusIndicator component', () => {
+  test('renders states correctly', () => {
+    const renderError = () => <View testID="error" />
+    const renderIdle = () => <View testID="idle" />
+    const renderLoading = () => <View testID="loading" />
     const { rerender } = render(
       <SearchStatusIndicator
         status={SearchStatus.IDLE}
@@ -15,10 +15,10 @@ describe("SearchStatusIndicator component", () => {
         renderIdle={renderIdle}
         renderLoading={renderLoading}
       />
-    );
-    expect(screen.getByTestId("idle")).toBeOnTheScreen();
-    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
-    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
+    )
+    expect(screen.getByTestId('idle')).toBeOnTheScreen()
+    expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
+    expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
 
     rerender(
       <SearchStatusIndicator
@@ -27,11 +27,11 @@ describe("SearchStatusIndicator component", () => {
         renderIdle={renderIdle}
         renderLoading={renderLoading}
       />
-    );
+    )
 
-    expect(screen.getByTestId("loading")).toBeOnTheScreen();
-    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
-    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
+    expect(screen.getByTestId('loading')).toBeOnTheScreen()
+    expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
+    expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
 
     rerender(
       <SearchStatusIndicator
@@ -40,17 +40,17 @@ describe("SearchStatusIndicator component", () => {
         renderIdle={renderIdle}
         renderLoading={renderLoading}
       />
-    );
+    )
 
-    expect(screen.getByTestId("error")).toBeOnTheScreen();
-    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
-    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
-  });
+    expect(screen.getByTestId('error')).toBeOnTheScreen()
+    expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
+    expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
+  })
 
-  it("does not render when status is null", () => {
-    const renderError = () => <View testID="error" />;
-    const renderIdle = () => <View testID="idle" />;
-    const renderLoading = () => <View testID="loading" />;
+  it('does not render when status is null', () => {
+    const renderError = () => <View testID="error" />
+    const renderIdle = () => <View testID="idle" />
+    const renderLoading = () => <View testID="loading" />
     render(
       <SearchStatusIndicator
         status={null}
@@ -58,10 +58,10 @@ describe("SearchStatusIndicator component", () => {
         renderIdle={renderIdle}
         renderLoading={renderLoading}
       />
-    );
+    )
 
-    expect(screen.queryByTestId("error")).not.toBeOnTheScreen();
-    expect(screen.queryByTestId("loading")).not.toBeOnTheScreen();
-    expect(screen.queryByTestId("idle")).not.toBeOnTheScreen();
-  });
-});
+    expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
+    expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
+    expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
+  })
+})

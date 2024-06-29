@@ -1,44 +1,43 @@
-import { Keyboard, StyleSheet, View } from "react-native";
-import { Input } from "../shared";
-import { Button } from "../shared";
-import { Controller, useForm } from "react-hook-form";
-import { Spacing } from "@/theme/Spacing";
-import { Colors } from "@/theme/Colors";
+import { Colors } from '@/theme/Colors'
+import { Spacing } from '@/theme/Spacing'
+import { Controller, useForm } from 'react-hook-form'
+import { Keyboard, StyleSheet, View } from 'react-native'
+import { Button, Input } from '../shared'
 
 interface SearchFormProps {
-  onSubmit: (formValues: SearchFormValues) => void;
-  isSubmitting?: boolean;
+  onSubmit: (formValues: SearchFormValues) => void
+  isSubmitting?: boolean
 }
 
 interface SearchFormValues {
-  owner: string;
-  repo: string;
+  owner: string
+  repo: string
 }
 
 export const SearchFormLabels = {
-  owner: "Owner",
-  repo: "Repository",
-  search: "Search",
-};
+  owner: 'Owner',
+  repo: 'Repository',
+  search: 'Search'
+}
 
 export function SearchForm({ onSubmit, isSubmitting }: SearchFormProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SearchFormValues>({
     defaultValues: {
-      owner: "",
-      repo: "",
-    },
-  });
+      owner: '',
+      repo: ''
+    }
+  })
 
   /**
    * Strip whitespace from the input value.
    * @param {string} value - The input value.
    * @returns {string} - The input value without leading or trailing whitespace.
    */
-  const trimInput = (value: string): string => value.trim();
+  const trimInput = (value: string): string => value.trim()
 
   /**
    * NOTE: Validation is superfluous in this form.
@@ -52,7 +51,7 @@ export function SearchForm({ onSubmit, isSubmitting }: SearchFormProps) {
           <Input
             placeholder="facebook"
             label={SearchFormLabels.owner}
-            onChange={(v) => field.onChange(trimInput(v))}
+            onChange={v => field.onChange(trimInput(v))}
             value={field.value}
             error={!!errors.owner}
           />
@@ -66,7 +65,7 @@ export function SearchForm({ onSubmit, isSubmitting }: SearchFormProps) {
           <Input
             placeholder="react"
             label={SearchFormLabels.repo}
-            onChange={(v) => field.onChange(trimInput(v))}
+            onChange={v => field.onChange(trimInput(v))}
             value={field.value}
             error={!!errors.repo}
           />
@@ -77,14 +76,14 @@ export function SearchForm({ onSubmit, isSubmitting }: SearchFormProps) {
       <Button
         label={SearchFormLabels.search}
         disabled={isSubmitting}
-        onPress={handleSubmit((formData) => {
-          Keyboard.dismiss();
-          onSubmit(formData);
+        onPress={handleSubmit(formData => {
+          Keyboard.dismiss()
+          onSubmit(formData)
         })}
         title="Search"
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -92,6 +91,6 @@ const styles = StyleSheet.create({
     gap: Spacing.l,
     paddingHorizontal: Spacing.m,
     paddingBottom: Spacing.l,
-    backgroundColor: Colors.bgDefault,
-  },
-});
+    backgroundColor: Colors.bgDefault
+  }
+})

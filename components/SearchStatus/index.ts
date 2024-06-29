@@ -1,2 +1,2 @@
-export { SearchStatusIndicator } from "./SearchStatusIndicator";
-export { IdleStatus, LoadingStatus, ErrorStatus } from "./Status";
+export { SearchStatusIndicator } from './SearchStatusIndicator'
+export { ErrorStatus, IdleStatus, LoadingStatus } from './Status'

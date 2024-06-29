@@ -1,22 +1,22 @@
-import { FlatList, StyleSheet } from "react-native";
-import { ListItem } from "./ListItem";
-import { ListEmpty } from "./ListEmpty";
-import { Stargazer } from "@/api/useStargazers";
-import { Colors } from "@/theme/Colors";
-import { ListFooter } from "./ListFooter";
+import { Stargazer } from '@/api/useStargazers'
+import { Colors } from '@/theme/Colors'
+import { FlatList, StyleSheet } from 'react-native'
+import { ListEmpty } from './ListEmpty'
+import { ListFooter } from './ListFooter'
+import { ListItem } from './ListItem'
 
 interface StargazerListProps {
-  stargazers: Stargazer[];
-  isLoadingMore?: boolean;
-  isLoadMoreFailed?: boolean;
-  loadMore?: () => void;
+  stargazers: Stargazer[]
+  isLoadingMore?: boolean
+  isLoadMoreFailed?: boolean
+  loadMore?: () => void
 }
 
 export function StargazerList({
   stargazers,
   isLoadingMore,
   isLoadMoreFailed,
-  loadMore,
+  loadMore
 }: StargazerListProps) {
   return (
     <FlatList
@@ -37,12 +37,12 @@ export function StargazerList({
         />
       }
     />
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: Colors.bgDefault,
-  },
-});
+    backgroundColor: Colors.bgDefault
+  }
+})

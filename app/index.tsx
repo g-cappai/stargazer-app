@@ -1,18 +1,18 @@
-import { useStargazers } from "@/api/useStargazers";
-import { SearchForm } from "@/components/SearchForm";
+import { useStargazers } from '@/api/useStargazers'
+import { SearchForm } from '@/components/SearchForm'
 import {
   ErrorStatus,
   IdleStatus,
   LoadingStatus,
-  SearchStatusIndicator,
-} from "@/components/SearchStatus";
-import { SearchStatus } from "@/components/SearchStatus/SearchStatusIndicator";
-import { StargazerList } from "@/components/StargazerList";
-import { useState } from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
+  SearchStatusIndicator
+} from '@/components/SearchStatus'
+import { SearchStatus } from '@/components/SearchStatus/SearchStatusIndicator'
+import { StargazerList } from '@/components/StargazerList'
+import { useState } from 'react'
+import { View } from 'react-native'
 
 export default function Index() {
-  const [searchData, setSearchData] = useState({ owner: "", repo: "" });
+  const [searchData, setSearchData] = useState({ owner: '', repo: '' })
 
   const {
     data,
@@ -22,8 +22,8 @@ export default function Index() {
     isError,
     isFetching,
     isPending,
-    isSuccess,
-  } = useStargazers({ owner: searchData.owner, repo: searchData.repo });
+    isSuccess
+  } = useStargazers({ owner: searchData.owner, repo: searchData.repo })
 
   /**
    * Get the status of the search based on useStargazers state.
@@ -34,19 +34,19 @@ export default function Index() {
 
   const getSearchStatus = (): SearchStatus | null => {
     if (isFetching) {
-      return SearchStatus.LOADING;
+      return SearchStatus.LOADING
     }
 
     if (isPending) {
-      return SearchStatus.IDLE;
+      return SearchStatus.IDLE
     }
 
     if (isError) {
-      return SearchStatus.ERROR;
+      return SearchStatus.ERROR
     }
 
-    return null;
-  };
+    return null
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -69,5 +69,5 @@ export default function Index() {
         />
       )}
     </View>
-  );
+  )
 }

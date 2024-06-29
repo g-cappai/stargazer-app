@@ -1,9 +1,9 @@
 export type Links = {
-  next?: string;
-  prev?: string;
-  last?: string;
-  first?: string;
-};
+  next?: string
+  prev?: string
+  last?: string
+  first?: string
+}
 
 /**
  * Extracts links from the `Link` header.
@@ -13,13 +13,16 @@ export type Links = {
 
 export function getPaginationLinks(linkHeader: string | null): Links {
   if (!linkHeader) {
-    return {};
+    return {}
   }
 
-  const links = [...(linkHeader?.matchAll(/<(.+?)>;\srel="(.+?)"/gm) || [])];
+  const links = [...(linkHeader?.matchAll(/<(.+?)>;\srel="(.+?)"/gm) || [])]
 
-  return links.reduce((acc, curr) => {
-    acc[curr?.[2] as string] = curr?.[1] as string;
-    return acc;
-  }, {} as Record<string, string>);
+  return links.reduce(
+    (acc, curr) => {
+      acc[curr?.[2] as string] = curr?.[1] as string
+      return acc
+    },
+    {} as Record<string, string>
+  )
 }
