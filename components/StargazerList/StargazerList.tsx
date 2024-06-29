@@ -1,7 +1,8 @@
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
 import { ListItem } from "./ListItem";
 import { ListEmpty } from "./ListEmpty";
 import { Stargazer } from "@/api/useStargazers";
+import { Colors } from "@/theme/Colors";
 
 interface StargazerListProps {
   stargazers: Stargazer[];
@@ -16,7 +17,7 @@ export function StargazerList({
 }: StargazerListProps) {
   return (
     <FlatList
-      contentContainerStyle={{ flexGrow: 1 }}
+      style={styles.contentContainer}
       accessibilityRole="list"
       aria-label="Stargazers list"
       data={stargazers}
@@ -33,3 +34,10 @@ export function StargazerList({
     />
   );
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    backgroundColor: Colors.bgDefault,
+  },
+});
