@@ -19,16 +19,27 @@
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gcappai.stargazerapp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": ""
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8f3d2426-3f01-47fe-a9f8-eb5e06613c2a"
+      }
     }
   }
 }
