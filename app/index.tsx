@@ -50,7 +50,10 @@ export default function Index() {
 
   return (
     <View style={{ flex: 1 }}>
-      <SearchForm onSubmit={setSearchData} />
+      <SearchForm
+        onSubmit={setSearchData}
+        isSubmitting={isFetching && !isFetchingNextPage}
+      />
       {isSuccess ? (
         <StargazerList
           stargazers={data!.flat()}

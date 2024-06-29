@@ -7,6 +7,7 @@ import { Colors } from "@/theme/Colors";
 
 interface SearchFormProps {
   onSubmit: (formValues: SearchFormValues) => void;
+  isSubmitting?: boolean;
 }
 
 interface SearchFormValues {
@@ -20,7 +21,7 @@ export const SearchFormLabels = {
   search: "Search",
 };
 
-export function SearchForm({ onSubmit }: SearchFormProps) {
+export function SearchForm({ onSubmit, isSubmitting }: SearchFormProps) {
   const {
     control,
     handleSubmit,
@@ -75,6 +76,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
       />
       <Button
         label={SearchFormLabels.search}
+        disabled={isSubmitting}
         onPress={handleSubmit((formData) => {
           Keyboard.dismiss();
           onSubmit(formData);
