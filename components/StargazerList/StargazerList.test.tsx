@@ -89,7 +89,7 @@ describe("StargazersList component", () => {
 
     fireEvent(screen.getByLabelText("Stargazers list"), "onEndReached");
 
-    const tryAgain = screen.getByLabelText("Try again");
+    const tryAgain = screen.getByText("try again", { exact: false });
     expect(tryAgain).toBeOnTheScreen();
   });
 });
