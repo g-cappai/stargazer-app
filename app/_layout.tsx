@@ -8,7 +8,7 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <Stack
         screenOptions={{
-          headerTitle: "Stargazer Viewers",
+          headerTitle: "Stargazers Viewer",
           headerTintColor: Colors.text,
           headerStyle: {
             backgroundColor: Colors.bgDefault,
