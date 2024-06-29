@@ -49,24 +49,22 @@ export default function Index() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={{ flex: 1 }}>
-        <SearchForm onSubmit={setSearchData} />
-        {isSuccess ? (
-          <StargazerList
-            stargazers={data!.flat()}
-            loadMore={fetchNextPage}
-            isLoadingMore={isFetchingNextPage}
-          />
-        ) : (
-          <SearchStatusIndicator
-            status={getSearchStatus()}
-            renderError={() => <ErrorStatus statusCode={error?.status} />}
-            renderIdle={() => <IdleStatus />}
-            renderLoading={() => <LoadingStatus />}
-          />
-        )}
-      </View>
-    </TouchableWithoutFeedback>
+    <View style={{ flex: 1 }}>
+      <SearchForm onSubmit={setSearchData} />
+      {isSuccess ? (
+        <StargazerList
+          stargazers={data!.flat()}
+          loadMore={fetchNextPage}
+          isLoadingMore={isFetchingNextPage}
+        />
+      ) : (
+        <SearchStatusIndicator
+          status={getSearchStatus()}
+          renderError={() => <ErrorStatus statusCode={error?.status} />}
+          renderIdle={() => <IdleStatus />}
+          renderLoading={() => <LoadingStatus />}
+        />
+      )}
+    </View>
   );
 }
