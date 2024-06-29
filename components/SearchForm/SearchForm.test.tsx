@@ -17,17 +17,6 @@ describe('SearchForm component', () => {
     jest.useRealTimers()
   })
 
-  it('should render a search form', () => {
-    render(<SearchForm onSubmit={() => {}} />)
-    const repositoryOwnerInput = screen.getByLabelText(SearchFormLabels.owner)
-    const repoInput = screen.getByLabelText(SearchFormLabels.repo)
-    const searchButton = screen.getByText(SearchFormLabels.search)
-
-    expect(repositoryOwnerInput).toBeDefined()
-    expect(repoInput).toBeDefined()
-    expect(searchButton).toBeDefined()
-  })
-
   it('should submit form if valid when search button is pressed', async () => {
     const handleSubmit = jest.fn()
     render(<SearchForm onSubmit={handleSubmit} />)

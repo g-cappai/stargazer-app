@@ -4,48 +4,40 @@ import { View } from 'react-native'
 import { SearchStatus, SearchStatusIndicator } from './SearchStatusIndicator'
 
 describe('SearchStatusIndicator component', () => {
-  test('renders states correctly', () => {
-    const renderError = () => <View testID="error" />
-    const renderIdle = () => <View testID="idle" />
-    const renderLoading = () => <View testID="loading" />
-    const { rerender } = render(
-      <SearchStatusIndicator
-        status={SearchStatus.IDLE}
-        renderError={renderError}
-        renderIdle={renderIdle}
-        renderLoading={renderLoading}
-      />
-    )
-    expect(screen.getByTestId('idle')).toBeOnTheScreen()
-    expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
-    expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
+  it.each([SearchStatus.IDLE, SearchStatus.LOADING, SearchStatus.ERROR])(
+    'renders %s state correctly',
+    status => {
+      const renderError = () => <View testID="error" />
+      const renderIdle = () => <View testID="idle" />
+      const renderLoading = () => <View testID="loading" />
+      render(
+        <SearchStatusIndicator
+          status={status}
+          renderError={renderError}
+          renderIdle={renderIdle}
+          renderLoading={renderLoading}
+        />
+      )
 
-    rerender(
-      <SearchStatusIndicator
-        status={SearchStatus.LOADING}
-        renderError={renderError}
-        renderIdle={renderIdle}
-        renderLoading={renderLoading}
-      />
-    )
-
-    expect(screen.getByTestId('loading')).toBeOnTheScreen()
-    expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
-    expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
-
-    rerender(
-      <SearchStatusIndicator
-        status={SearchStatus.ERROR}
-        renderError={renderError}
-        renderIdle={renderIdle}
-        renderLoading={renderLoading}
-      />
-    )
-
-    expect(screen.getByTestId('error')).toBeOnTheScreen()
-    expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
-    expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
-  })
+      switch (status) {
+        case SearchStatus.IDLE:
+          expect(screen.getByTestId('idle')).toBeOnTheScreen()
+          expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
+          expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
+          break
+        case SearchStatus.LOADING:
+          expect(screen.getByTestId('loading')).toBeOnTheScreen()
+          expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
+          expect(screen.queryByTestId('error')).not.toBeOnTheScreen()
+          break
+        case SearchStatus.ERROR:
+          expect(screen.getByTestId('error')).toBeOnTheScreen()
+          expect(screen.queryByTestId('loading')).not.toBeOnTheScreen()
+          expect(screen.queryByTestId('idle')).not.toBeOnTheScreen()
+          break
+      }
+    }
+  )
 
   it('does not render when status is null', () => {
     const renderError = () => <View testID="error" />

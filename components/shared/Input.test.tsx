@@ -3,12 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react-native'
 import { Input } from './Input'
 
 describe('Input component', () => {
-  it('should render an input element', () => {
-    render(<Input label="inputLabel" />)
-    const input = screen.getByLabelText('inputLabel')
-    expect(input).toBeOnTheScreen()
-  })
-
   it("should show a red border if there's an error", () => {
     const { rerender } = render(<Input label="inputLabel" />)
     expect(screen.queryByLabelText('inputLabel')).toHaveStyle({

@@ -2,12 +2,6 @@ import { fireEvent, render, screen } from '@testing-library/react-native'
 import { Button } from './Button'
 
 describe('Button component', () => {
-  it('should render a button element', () => {
-    render(<Button />)
-    const button = screen.getByRole('button')
-    expect(button).toBeOnTheScreen()
-  })
-
   it('should call the onPress function when the button is pressed', () => {
     const onPress = jest.fn()
     render(<Button onPress={onPress} />)
