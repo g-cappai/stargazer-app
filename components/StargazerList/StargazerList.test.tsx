@@ -72,4 +72,24 @@ describe("StargazersList component", () => {
 
     await waitFor(() => expect(loadMore).not.toHaveBeenCalled());
   });
+
+  it("should display a try again message in case isLoadingMoreError is true", () => {
+    const loadMore = jest.fn();
+    render(
+      <StargazerList
+        stargazers={[
+          { id: 1, avatarUrl: "", name: "User1" },
+          { id: 2, avatarUrl: "", name: "User2" },
+        ]}
+        isLoadingMore={false}
+        isLoadMoreFailed={true}
+        loadMore={loadMore}
+      />
+    );
+
+    fireEvent(screen.getByLabelText("Stargazers list"), "onEndReached");
+
+    const tryAgain = screen.getByLabelText("Try again");
+    expect(tryAgain).toBeOnTheScreen();
+  });
 });
