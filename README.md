@@ -1,50 +1,45 @@
-# Welcome to your Expo app 👋
+# Stargazers Viewer
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a mobile application to view the stargazers of a GitHub repository.
 
-## Get started
+## Getting Started
 
-1. Install dependencies
+The project is developed using React Native, specifically with the Expo framework. The application can be executed on both an emulator and a physical device using Expo Go.
 
-   ```bash
-   npm install
-   ```
+_Note: The app has been developed with Android as the target platform. While it should work on an iOS simulator (and can be built for iOS devices with minimal configuration), it may present graphical bugs and unexpected behaviors_
 
-2. Start the app
+## Prerequisites
 
-   ```bash
-    npx expo start
-   ```
+- Node.js (version 18)
+- Mestro (e2e tests)
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Running on Expo Go
 
 ```bash
-npm run reset-project
+# Clone the repository
+$ git clone https://github.com/g-cappai/stargazer-app
+
+# CD into the repository
+$ cd stargazer-app
+
+# Install dependencies
+$ yarn
+
+# Start development server
+$ yarn start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Pressing `s` allows you to switch between the development build and Expo Go. After selecting Expo Go, press `a` to launch the application on an emulator. Additionally, by installing Expo Go on your phone and scanning the QR code, you can execute the app with ease.
 
-## Learn more
+## Building the application
 
-To learn more about developing your project with Expo, look at the following resources:
+The app is already configured to be built for Android (development build). To run the build process, you need to install EAS CLI and register with Expo.
+Run `yarn build:android:dev:local` to run the build process locally using EAS.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Information about development builds, setting up the emulator, and more can be found in the [Expo official documentation](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&platform=android&device=simulated)
 
-## Join the community
+## e2e
 
-Join our community of developers creating universal apps.
+[Maestro](https://maestro.mobile.dev/getting-started/installing-maestro) is used for end-to-end (e2e) testing. You need a development build installed on the emulator in order to run tests. 
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+With everything set up, run `yarn e2e` to launch tests.
