@@ -1,0 +1,18 @@
+appId: com.gcappai.stargazerapp
+---
+- launchApp
+- tapOn:
+    point: "50%,25%"
+- tapOn: search
+- tapOn: facebook
+- inputText: facebook
+- tapOn: react
+- inputText: react
+- tapOn: SEARCH
+- extendedWaitUntil:
+    notVisible:
+      text: Looking for stargazers...
+    timeout: 10000
+- assertVisible:
+    id: stargazersListItem
+    index: 0
