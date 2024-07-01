@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
+    "e2e": "maestro test e2e",
     "build:android:dev:local": "eas build --platform android --profile development --local"
   },
   "dependencies": {
